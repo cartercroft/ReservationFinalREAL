@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1401
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationFinal.MVC.UI", "ReservationFinal.MVC.UI\ReservationFinal.MVC.UI.csproj", "{883454DF-6C02-478A-B02F-C70D346A8CB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationFinal.DATA.EF", "ReservationFinal.DATA.EF\ReservationFinal.DATA.EF.csproj", "{5A7EDBC0-7C76-4CDC-96C0-E3474C8A8F3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{883454DF-6C02-478A-B02F-C70D346A8CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{883454DF-6C02-478A-B02F-C70D346A8CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{883454DF-6C02-478A-B02F-C70D346A8CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7EDBC0-7C76-4CDC-96C0-E3474C8A8F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7EDBC0-7C76-4CDC-96C0-E3474C8A8F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7EDBC0-7C76-4CDC-96C0-E3474C8A8F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7EDBC0-7C76-4CDC-96C0-E3474C8A8F3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
