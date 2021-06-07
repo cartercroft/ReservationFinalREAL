@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="InstrumentType.cs">
       <DependentUpon>ReservationFinal.tt</DependentUpon>
     </Compile>
@@ -79,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReservationFinal.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ReservationFinalMetadata\ReservationFinalMetadata.cs" />
     <Compile Include="UserDetail.cs">
       <DependentUpon>ReservationFinal.tt</DependentUpon>
     </Compile>
