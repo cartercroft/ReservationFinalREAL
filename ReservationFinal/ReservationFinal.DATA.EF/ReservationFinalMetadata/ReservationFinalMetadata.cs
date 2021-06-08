@@ -80,9 +80,10 @@ namespace ReservationFinal.DATA.EF
 
         [DisplayFormat(NullDisplayText = "[N/A]")]
         [StringLength(50, ErrorMessage = "Instrument Photo must be 50 characters or less.")]
+        [Display(Name = "Instrument Photo")]
         public string InstrumentPhoto { get; set; }
 
-        [Display(Name = "Special Notes")]
+        [Display(Name = "Notes")]
         [UIHint("MultilineText")]
         [DisplayFormat(NullDisplayText = "[N/A]")]
         public string SpecialNotes { get; set; }
@@ -110,7 +111,7 @@ namespace ReservationFinal.DATA.EF
     {
         //public int InstrumentTypeID { get; set; }
         [Required(ErrorMessage = "Instrument Type Name is a required field.")]
-        [Display(Name = "Instrument Type Name")]
+        [Display(Name = "Instrument Type")]
         public string InstrumentTypeName { get; set; }
     }
 

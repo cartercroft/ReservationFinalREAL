@@ -169,8 +169,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstrumentTypesController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerInstrumentsController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,10 +185,14 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\images\brokenCymbal.jpeg" />
+    <Content Include="Content\instImages\noImage.png" />
+    <Content Include="Content\instImages\t_noImage.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -250,10 +257,25 @@
     <Content Include="Views\Locations\Details.cshtml" />
     <Content Include="Views\Locations\Edit.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\InstrumentTypes\Create.cshtml" />
+    <Content Include="Views\InstrumentTypes\Delete.cshtml" />
+    <Content Include="Views\InstrumentTypes\Details.cshtml" />
+    <Content Include="Views\InstrumentTypes\Edit.cshtml" />
+    <Content Include="Views\InstrumentTypes\Index.cshtml" />
+    <Content Include="Views\OwnerInstruments\Create.cshtml" />
+    <Content Include="Views\OwnerInstruments\Delete.cshtml" />
+    <Content Include="Views\OwnerInstruments\Details.cshtml" />
+    <Content Include="Views\OwnerInstruments\Edit.cshtml" />
+    <Content Include="Views\OwnerInstruments\Index.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Reservations\MaxCapacity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

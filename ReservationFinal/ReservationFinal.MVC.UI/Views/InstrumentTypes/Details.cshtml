@@ -1,0 +1,27 @@
+﻿@model ReservationFinal.DATA.EF.InstrumentType
+
+@{
+    ViewBag.Title = Model.InstrumentTypeName + " Details";
+}
+
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+
+    <div>
+        <h4 class="subHeader">Instrument Type</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.InstrumentTypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InstrumentTypeName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.InstrumentTypeID }) |
+        @Html.ActionLink("Back to List", "Index")
+</div></p>

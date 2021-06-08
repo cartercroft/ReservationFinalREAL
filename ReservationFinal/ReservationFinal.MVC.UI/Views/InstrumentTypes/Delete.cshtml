@@ -1,0 +1,33 @@
+﻿@model ReservationFinal.DATA.EF.InstrumentType
+
+@{
+    ViewBag.Title = $"Are you sure you want to delete {Model.InstrumentTypeName}?";
+}
+
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+    <div>
+        <h4>Instrument Type</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.InstrumentTypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InstrumentTypeName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

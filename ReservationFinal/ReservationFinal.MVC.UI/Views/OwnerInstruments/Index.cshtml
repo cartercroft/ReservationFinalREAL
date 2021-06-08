@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ReservationFinal.DATA.EF.OwnerInstrument>
+
+@{
+    ViewBag.Title = "Your Instruments";
+}
+
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InstrumentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstrumentPhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialNotes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstrumentType.InstrumentTypeName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstrumentName)
+                </td>
+                <td>
+                    <img src="~/Content/instImages/t_@item.InstrumentPhoto" alt="@item.InstrumentName" title="@item.InstrumentName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstrumentType.InstrumentTypeName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }) |
+                    @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

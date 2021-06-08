@@ -58,5 +58,26 @@
     margin: 1em 0;
 }
 
-h1.text-white
+.viewHeader{
+    text-align: center;
+    padding-top: 5%;
+}
 
+.subHeader{
+    padding: 1% 0;
+}
+
+.bgroundImg {
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+
+.instrumentPhoto{
+    border: solid black .05em;
+    border-radius: 2rem;
+    margin-bottom: 5%;
+}
+
+footer{
+    margin-top: 3%;
+}

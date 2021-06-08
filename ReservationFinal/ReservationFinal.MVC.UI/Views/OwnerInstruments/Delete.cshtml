@@ -1,0 +1,95 @@
+﻿@model ReservationFinal.DATA.EF.OwnerInstrument
+
+@{
+    if (Model.IsActive)
+    {
+        ViewBag.Title = $"Deactivate {Model.InstrumentName}?";
+    }
+    else
+    {
+        ViewBag.Title = $"Reactivate {Model.InstrumentName}?";
+    }
+}
+
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+    <div>
+        <h4>Instrument</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.InstrumentName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InstrumentName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.InstrumentPhoto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InstrumentPhoto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SpecialNotes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SpecialNotes)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateAdded)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.InstrumentType.InstrumentTypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InstrumentType.InstrumentTypeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserDetail.FirstName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+        @if (Model.IsActive)
+        {
+            <input type="submit" value="Deactivate" class="btn btn-danger" /> @:|
+        }
+        else
+        {
+            <input type="submit" value="Reactivate" class="btn btn-success" /> @:|
+        }
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+        }
+    </div>
+</div>

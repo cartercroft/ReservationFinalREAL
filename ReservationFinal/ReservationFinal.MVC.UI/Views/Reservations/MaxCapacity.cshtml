@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Sorry! Max Reservations";
+}
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <p>
+                The location you are trying to reserve is already at max capacity on that day. Try to schedule for a different date.
+            </p>
+            <a class="text-center btn btn-dark" href="@Url.Action("Index", "Reservations")">Back to Reservations</a>
+        </div>
+    </div>
+</div>

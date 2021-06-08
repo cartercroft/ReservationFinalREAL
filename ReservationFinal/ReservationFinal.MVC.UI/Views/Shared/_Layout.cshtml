@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Full Width Pics - Start Bootstrap Template</title>
+    <title>FixIt4U | @ViewBag.Title</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -16,24 +16,25 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Start Bootstrap</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">FixIt4U</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="@Url.Action("Index", "Home")">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Locations")">Locations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">Your Instruments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Reservations")">Reservations</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
     <!-- Header - set the background image for the header in the line below-->
-    <header class="py-5 bg-image-full" style="background-image: url('/Content/images/brokenCymbal.jpeg')">
+    <header class="bg-image-full bgroundImg" style="background-image: url('/Content/images/brokenCymbal.jpeg')">
         <div class="text-center my-5">
             @*<img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />*@
-            <h1 class="text-white fs-3 fw-bolder">Full Width Pics</h1>
-            <p class="text-white-50 mb-0">Landing Page Template</p>
+            <h1 class="text-white fs-3 fw-bolder">FixIt4U</h1>
+            <p class="text-white-50 mb-0">You break it? We fix it!</p>
         </div>
     </header>
     <!-- Content section-->
@@ -55,6 +56,7 @@
             <a href="javascript:void(0)" class="close-btn" onclick="closeAdminNav()"> &times;</a>
             <a href="@Url.Action("Index", "RolesAdmin")">Manage Roles</a>
             <a href="@Url.Action("Index", "UsersAdmin")">Manage Users</a>
+            <a href="@Url.Action("Index", "InstrumentTypes")">Manage Instrument Types</a>
         </div>
     }
 

@@ -1,0 +1,80 @@
+﻿@model ReservationFinal.DATA.EF.OwnerInstrument
+
+@{
+    ViewBag.Title = $"{Model.InstrumentName} Details";
+}
+
+<div class="container" style="padding-top: 5%;">
+    <div class="row align-items-center">
+        <div class="col-md-5">
+            <img class="instrumentPhoto" src="~/Content/instImages/@Model.InstrumentPhoto" />
+        </div>
+        <div class="col-md-4">
+            <h4>@ViewBag.Title</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.InstrumentName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.InstrumentName)
+                </dd>
+
+                @*<dt>
+                        @Html.DisplayNameFor(model => model.InstrumentPhoto)
+                    </dt>*@
+
+                @*<dd>
+                        @Html.DisplayFor(model => model.InstrumentPhoto)
+                    </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SpecialNotes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SpecialNotes)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateAdded)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateAdded)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.InstrumentType.InstrumentTypeName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.InstrumentType.InstrumentTypeName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserDetail.FirstName)
+                </dd>
+
+            </dl>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerInstrumentID }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+
+</div>

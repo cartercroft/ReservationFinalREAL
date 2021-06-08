@@ -154,6 +154,7 @@ namespace ReservationFinal.MVC.UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Customer");
                     #region Assign UserDetails during registration
                     UserDetail newUserDeets = new UserDetail();
                     newUserDeets.UserID = user.Id;

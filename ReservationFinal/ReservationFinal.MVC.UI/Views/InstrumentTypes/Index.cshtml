@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ReservationFinal.DATA.EF.InstrumentType>
+
+@{
+    ViewBag.Title = "Instrument Types Index";
+}
+
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InstrumentTypeName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstrumentTypeName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.InstrumentTypeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.InstrumentTypeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.InstrumentTypeID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
