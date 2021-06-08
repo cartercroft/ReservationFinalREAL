@@ -79,6 +79,14 @@ namespace ReservationFinal.MVC.UI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [StringLength(50, ErrorMessage = "First Name must be 50 characters or less.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [StringLength(50, ErrorMessage = "Last Name must be 50 characters or less.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
     }
 
     public class ResetPasswordViewModel

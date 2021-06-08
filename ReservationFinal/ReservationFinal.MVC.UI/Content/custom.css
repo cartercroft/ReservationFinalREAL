@@ -1,0 +1,62 @@
+﻿/*#region Admin Side Nav*/
+.sidenav {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.9);
+    z-index: 1030;
+    width: 0;
+    overflow-x: hidden; /*if content overflows the horizontal width of the container, that content will disappear at the edge of that container.*/
+    padding-top: 100px;
+    transition: .5s;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2em;
+}
+
+.sidenav a {
+    font-size: 1.5em;
+    display: block;
+    text-decoration: none;
+    padding: 8px 8px 8px 32px;
+    color: #818181;
+    transition: .3s;
+}
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+.button {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, .9);
+    height: 100%;
+    width: 20px;
+    z-index: 1030;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+.vertical-text {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    /*Below we rotate the text to be vertical in the button*/
+    writing-mode: vertical-lr;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+/*#endregion*/
+.col-md-offset-2 input.btn{
+    margin: 1em 0;
+}
+
+h1.text-white
+
