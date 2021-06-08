@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstrumentTypesController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\images\brokenCymbal.jpeg" />
+    <Content Include="Content\images\error.jpg" />
     <Content Include="Content\instImages\noImage.png" />
     <Content Include="Content\instImages\t_noImage.png" />
     <Content Include="favicon.ico" />
@@ -273,6 +275,7 @@
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
     <Content Include="Views\Reservations\MaxCapacity.cshtml" />
+    <Content Include="Views\Errors\Unresolved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
