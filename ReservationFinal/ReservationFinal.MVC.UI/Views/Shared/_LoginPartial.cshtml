@@ -19,7 +19,7 @@
         @Html.AntiForgeryToken()
         <ul class="nav navbar-nav navbar-right">
             <li>
-                | @Html.ActionLink("Hello " + userName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "text-white text-decoration-none" })
+                @Html.ActionLink("Hello " + userName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "text-white text-decoration-none" })
             </li>
             &nbsp; &nbsp;
             <li><a href="javascript:document.getElementById('logoutForm').submit()" class="text-white text-decoration-none">Log off</a></li>
