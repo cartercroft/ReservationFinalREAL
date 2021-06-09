@@ -1,0 +1,17 @@
+﻿@model ReservationFinal.MVC.UI.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Email Confirmation";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-2 col-md-8 text-center email emailSuccess pb-2 mt-lg-3">
+            <h2>@ViewBag.Title</h2>
+
+            <h4>We received the following message:</h4>
+            <p>@Model.Message</p>
+            <h4>We will respond as soon as possible to @Model.Email. Thank you for contacting us.</h4>
+        </div>
+    </div>
+</div>

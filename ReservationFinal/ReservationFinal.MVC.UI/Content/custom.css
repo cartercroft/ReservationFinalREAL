@@ -113,3 +113,19 @@ td.child:hover {
 #dataTable_filter{
     margin-bottom: .5%;
 }
+
+.emailFail {
+    background-color: rgba(210,19,34, .4);
+    overflow-wrap: break-word;
+}
+
+.emailSuccess {
+    background-color: rgb(209,231,221);
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.email {
+    padding: 2% 1% 0 2%;
+    border-radius: 2em;
+}
