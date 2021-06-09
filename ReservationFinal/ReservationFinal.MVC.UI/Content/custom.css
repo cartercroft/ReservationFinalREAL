@@ -105,3 +105,11 @@ footer{
 .headerSubTitle{
     font-size: 1.5rem;
 }
+
+td.child:hover {
+    background-color: white !important;
+}
+
+#dataTable_filter{
+    margin-bottom: .5%;
+}

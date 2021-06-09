@@ -11,13 +11,14 @@ using Microsoft.AspNet.Identity;
 
 namespace ReservationFinal.MVC.UI.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private ReservationFinalEntities db = new ReservationFinalEntities();
         // GET: Reservations
         public ActionResult Index()
         {
-            if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+            if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
             {
                var reservations = db.Reservations.Include(r => r.Location).Include(r => r.OwnerInstrument);
                return View(reservations.ToList());
@@ -113,6 +114,13 @@ namespace ReservationFinal.MVC.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                ReservationFinalEntities db1 = new ReservationFinalEntities(); //Needed because EF cannot track more than 1 Entity, Inefficient but works
+                var location = db1.Locations.Where(l => l.LocationID == reservation.LocationID).FirstOrDefault();
+
+                if (location.Reservations.Where(r => r.ReservationDate == reservation.ReservationDate).ToList().Count >= location.ReservationLimit && !User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("MaxCapacity");
+                }
                 db.Entry(reservation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

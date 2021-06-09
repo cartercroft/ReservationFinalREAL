@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-    <h2>@ViewBag.Title</h2>
+    <h2 class="viewHeader">@ViewBag.Title</h2>
 
     @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Create" />
+                <input type="submit" class="btn btn-primary" value="Create" />
             </div>
         </div>
     }

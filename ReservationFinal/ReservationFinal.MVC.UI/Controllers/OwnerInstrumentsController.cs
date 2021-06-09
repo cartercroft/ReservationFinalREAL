@@ -23,6 +23,10 @@ namespace ReservationFinal.MVC.UI.Controllers
         {
             var currentUser = User.Identity.GetUserId();
             var ownerInstruments = db.OwnerInstruments.Where(o => o.OwnerID == currentUser).Include(o => o.InstrumentType).Include(o => o.UserDetail);
+            if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+            {
+                ownerInstruments = db.OwnerInstruments.Include(o => o.InstrumentType).Include(o => o.UserDetail);
+            }
             return View(ownerInstruments.ToList());
         }
 
@@ -153,9 +157,10 @@ namespace ReservationFinal.MVC.UI.Controllers
 
                         #endregion
                     }
+                    ownerInstrument.InstrumentPhoto = file;
                 }
                 // No matter what, update the photoUrl with the value of the file variable
-                ownerInstrument.InstrumentPhoto = file;
+                
                 #endregion
                 db.Entry(ownerInstrument).State = EntityState.Modified;
                 db.SaveChanges();

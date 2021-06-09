@@ -11,28 +11,45 @@
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
     </p>
     <div class="table-responsive-md">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.InstrumentTypeName)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <table class="table table-striped" id="dataTable">
+            <thead class="bg-dark text-white">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InstrumentTypeName)
-                    </td>
-                    <td class="text-center">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
-                        @Html.ActionLink("Details", "Details", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InstrumentTypeName)
+                    </th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InstrumentTypeName)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
+                            @Html.ActionLink("Details", "Details", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.InstrumentTypeID }, new { @class = "btn btn-sm btn-dark" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
     </div>
 </div>
+
+@section scripts
+{
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+             $('#dataTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+}

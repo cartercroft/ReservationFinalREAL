@@ -62,7 +62,11 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) |
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) @:|
+        }
+
         @Html.ActionLink("Back to List", "Index")
     </p>
 </div>

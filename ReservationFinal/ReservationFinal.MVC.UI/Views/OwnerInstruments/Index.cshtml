@@ -1,17 +1,27 @@
-﻿@model IEnumerable<ReservationFinal.DATA.EF.OwnerInstrument>
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<ReservationFinal.DATA.EF.OwnerInstrument>
 
 @{
-    ViewBag.Title = "Your Instruments";
+    if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+    {
+        ViewBag.Title = "All Instruments";
+    }
+    else
+    {
+        ViewBag.Title = "Your Instruments";
+    }
+
 }
 
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
 
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
-        </p>
-        <div class="table-responsive-md">
-            <table class="table table-striped">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
+    </p>
+    <div class="table-responsive-md">
+        <table class="table table-striped" id="dataTable">
+            <thead class="bg-dark text-white">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.InstrumentName)
@@ -33,7 +43,8 @@
                     </th>
                     <th></th>
                 </tr>
-
+            </thead>
+            <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -56,13 +67,38 @@
                             @Html.DisplayFor(modelItem => item.InstrumentType.InstrumentTypeName)
                         </td>
                         <td class="text-center">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
-                            @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
-                            @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                            @if (Request.IsAuthenticated && User.IsInRole("Employee") && item.OwnerID != User.Identity.GetUserId())
+                            {
+                                //If the User is an employee and the instrument is not theirs
+                                @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                @:&nbsp;
+                                @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                @:&nbsp;
+                                @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                @:&nbsp;
+                                @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                            }
                         </td>
                     </tr>
                 }
-
-            </table>
-        </div>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+@section scripts
+{
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+             $('#dataTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+}

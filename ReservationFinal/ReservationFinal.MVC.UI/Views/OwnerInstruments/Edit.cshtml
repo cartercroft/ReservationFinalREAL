@@ -1,4 +1,5 @@
-﻿@model ReservationFinal.DATA.EF.OwnerInstrument
+﻿@using Microsoft.AspNet.Identity;
+@model ReservationFinal.DATA.EF.OwnerInstrument
 
 @{
     ViewBag.Title = $"Edit {Model.InstrumentName}";
@@ -6,18 +7,20 @@
 
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
-
-    @using (Html.BeginForm("Edit", "OwnerInstruments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @if (!User.IsInRole("Employee"))
     {
-        @Html.AntiForgeryToken()
+        using (Html.BeginForm("Edit", "OwnerInstruments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>OwnerInstrument</h4>
+        <h4>Instrument</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.OwnerInstrumentID)
         @Html.HiddenFor(model => model.DateAdded)
         @Html.HiddenFor(model => model.OwnerID)
+        @Html.HiddenFor(model => model.InstrumentPhoto)
 
         <div class="form-group">
             @Html.LabelFor(model => model.InstrumentName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -26,14 +29,6 @@
                 @Html.ValidationMessageFor(model => model.InstrumentName, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.OwnerID, "OwnerID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OwnerID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.OwnerID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SpecialNotes, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -52,14 +47,6 @@
                 </div>
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateAdded, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateAdded, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.InstrumentTypeID, "Instrument Type", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,6 +70,107 @@
             </div>
         </div>
     </div>
+        }
+    }
+    else if (User.IsInRole("Employee") && Model.OwnerID == User.Identity.GetUserId())
+    {
+        using (Html.BeginForm("Edit", "OwnerInstruments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Instrument</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.OwnerInstrumentID)
+                @Html.HiddenFor(model => model.DateAdded)
+                @Html.HiddenFor(model => model.OwnerID)
+                @Html.HiddenFor(model => model.InstrumentPhoto)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InstrumentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.InstrumentName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InstrumentName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SpecialNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SpecialNotes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SpecialNotes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InstrumentTypeID, "Instrument Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("InstrumentTypeID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.InstrumentTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InstrumentPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="instrumentPhoto" />
+                        @Html.ValidationMessageFor(model => model.InstrumentPhoto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Instrument</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.OwnerInstrumentID)
+                @Html.HiddenFor(model => model.DateAdded)
+                @Html.HiddenFor(model => model.OwnerID)
+                @Html.HiddenFor(model => model.InstrumentName)
+                @Html.HiddenFor(model => model.InstrumentTypeID)
+                @Html.HiddenFor(model => model.IsActive)
+                @Html.HiddenFor(model => model.InstrumentPhoto)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SpecialNotes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SpecialNotes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SpecialNotes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
     }
 
     <div>

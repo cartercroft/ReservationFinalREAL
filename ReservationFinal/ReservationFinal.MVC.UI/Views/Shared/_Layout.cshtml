@@ -8,6 +8,9 @@
     <title>FixIt4U | @ViewBag.Title</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" />
+    <!--DataTables CSS-->
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
@@ -22,7 +25,15 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="@Url.Action("Index", "Home")">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Locations")">Locations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">Your Instruments</a></li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">All Instruments</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">Your Instruments</a></li>
+                    }
+
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Reservations")">Reservations</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
