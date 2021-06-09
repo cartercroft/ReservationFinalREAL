@@ -1,11 +1,14 @@
-﻿/*#region Admin Side Nav*/
+﻿body {
+    background-color: hsl(46,37%,83%) !important;
+}
+/*#region Admin Side Nav*/
 .sidenav {
     position: fixed;
     height: 100%;
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,.9);
-    z-index: 1030;
+    z-index: 0;
     width: 0;
     overflow-x: hidden; /*if content overflows the horizontal width of the container, that content will disappear at the edge of that container.*/
     padding-top: 100px;
@@ -39,7 +42,7 @@
     background-color: rgba(0,0,0, .9);
     height: 100%;
     width: 20px;
-    z-index: 1030;
+    z-index: 0;
     font-family: sans-serif;
     cursor: pointer;
 }
@@ -52,6 +55,13 @@
     writing-mode: vertical-lr;
     color: #f1f1f1;
     font-weight: bold;
+}
+
+@media(max-width: 576px)
+{
+    #admin-btn{
+        margin-right: 2%;
+    }
 }
 /*#endregion*/
 .col-md-offset-2 input.btn{
@@ -80,4 +90,18 @@
 
 footer{
     margin-top: 3%;
+}
+
+.pageBreak {
+    width: 100%;
+    height: 5rem;
+    background-color: #5670b3;
+}
+
+.headerTitle{
+    font-size: 3rem;
+}
+
+.headerSubTitle{
+    font-size: 1.5rem;
 }

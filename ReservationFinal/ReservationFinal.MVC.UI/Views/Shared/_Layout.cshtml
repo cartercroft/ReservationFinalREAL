@@ -7,7 +7,7 @@
     <meta name="author" content="" />
     <title>FixIt4U | @ViewBag.Title</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/Content/css/styles.css" rel="stylesheet" />
     <link href="~/Content/custom.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">FixIt4U</a>
+            <a class="navbar-brand text-primary" href="@Url.Action("Index", "Home")">FixIt4U</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -33,15 +33,16 @@
     <header class="bg-image-full bgroundImg" style="background-image: url('/Content/images/brokenCymbal.jpeg')">
         <div class="text-center my-5">
             @*<img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />*@
-            <h1 class="text-white fs-3 fw-bolder">FixIt4U</h1>
-            <p class="text-white-50 mb-0">You break it? We fix it!</p>
+            <h1 class="text-primary fw-bolder headerTitle">FixIt4U</h1>
+            <p class="text-white mb-0 headerSubTitle"><em>You break it?</em> <b>We fix it!</b></p>
         </div>
     </header>
+    <div class="pageBreak"></div>
     <!-- Content section-->
     @RenderBody()
     <!-- Footer-->
     <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website @DateTime.Now.Year</p></div>
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; FixIt4U, Carter Croft @DateTime.Now.Year</p></div>
     </footer>
 
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
