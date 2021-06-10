@@ -36,6 +36,7 @@ namespace ReservationFinal.MVC.UI.Controllers
         }
 
         // GET: Locations/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace ReservationFinal.MVC.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "LocationID,LocationName,Address,City,State,ZipCode,ReservationLimit")] Location location)
         {
             if (ModelState.IsValid)
@@ -57,9 +59,10 @@ namespace ReservationFinal.MVC.UI.Controllers
 
             return View(location);
         }
-
+        #region AJAX
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public JsonResult AjaxCreate(Location loc)
         {
             db.Locations.Add(loc);
@@ -67,7 +70,27 @@ namespace ReservationFinal.MVC.UI.Controllers
             return Json(loc);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public JsonResult AjaxEdit (Location loc)
+        {
+            db.Entry(loc).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(loc);
+        }
+        #endregion
+
+        [HttpGet]
+        public PartialViewResult LocationEdit(int id)
+        {
+            Location loc = db.Locations.Find(id);
+            return PartialView(loc); 
+
+        }
+
         // GET: Locations/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,6 +110,7 @@ namespace ReservationFinal.MVC.UI.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "LocationID,LocationName,Address,City,State,ZipCode,ReservationLimit")] Location location)
         {
             if (ModelState.IsValid)
@@ -99,6 +123,7 @@ namespace ReservationFinal.MVC.UI.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +141,7 @@ namespace ReservationFinal.MVC.UI.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Location location = db.Locations.Find(id);

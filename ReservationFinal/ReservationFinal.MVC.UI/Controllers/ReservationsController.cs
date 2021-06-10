@@ -18,6 +18,8 @@ namespace ReservationFinal.MVC.UI.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+            ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments, "OwnerInstrumentID", "InstrumentName");
             if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
             {
                var reservations = db.Reservations.Include(r => r.Location).Include(r => r.OwnerInstrument);
@@ -47,6 +49,16 @@ namespace ReservationFinal.MVC.UI.Controllers
             return View(reservation);
         }
 
+        #region AJAX Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxCreate(Reservation reservation)
+        {
+            db.Reservations.Add(reservation);
+            db.SaveChanges();
+            return Json(reservation);
+        }
+        #endregion
         // GET: Reservations/Create
         public ActionResult Create()
         {
@@ -114,8 +126,8 @@ namespace ReservationFinal.MVC.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                ReservationFinalEntities db1 = new ReservationFinalEntities(); //Needed because EF cannot track more than 1 Entity, Inefficient but works
-                var location = db1.Locations.Where(l => l.LocationID == reservation.LocationID).FirstOrDefault();
+                var location = db.Locations.AsNoTracking().Where(l => l.LocationID == reservation.LocationID).FirstOrDefault();
+                //Added AsNoTracking() to fix error
 
                 if (location.Reservations.Where(r => r.ReservationDate == reservation.ReservationDate).ToList().Count >= location.ReservationLimit && !User.IsInRole("Admin"))
                 {

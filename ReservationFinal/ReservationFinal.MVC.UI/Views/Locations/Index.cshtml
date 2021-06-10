@@ -11,94 +11,99 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css">
 }
 
-    <div class="container">
-        <h2 class="viewHeader">@ViewBag.Title</h2>
-        <div id="MessageContent"></div>
-        @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
-        {
+<div class="container">
+    <h2 class="viewHeader">@ViewBag.Title</h2>
 
-            <!-- Output element for our success or failure message to show to the user -->
+    <!-- Output element for our success or failure message to show to the user -->
+    <div id="MessageContent"></div>
 
-            <p>
-                @*@Html.ActionLink("Create New", "Create")*@
-                <button id="toggleLocationCreate" class="btn btn-primary text-right">Create New</button>
-            </p>
-
-            @* Create a placeholder for the Partial View to render *@
-            <div id="LocationCreate">
-                @Html.Partial("LocationCreate", new ReservationFinal.DATA.EF.Location())
-            </div>
-        }
+    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+    {
 
 
+        <p>
+            @*@Html.ActionLink("Create New", "Create")*@
+            <button id="toggleLocationCreate" class="btn btn-primary">Create New</button>
+        </p>
 
-        <div class="table-responsive-md">
-            <table class="table table-striped locationsTable" id="dataTable">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LocationName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Address)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.City)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.State)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ZipCode)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ReservationLimit)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr id="Location-@item.LocationID">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LocationName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.State)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ZipCode)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ReservationLimit)
-                            </td>
-                            <td class="text-center">
-                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                                {
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
-                                    @:&nbsp;
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
-                                    @:&nbsp;
-                                }
-
-                                @Html.ActionLink("Details", "Details", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
-
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-
-            </table>
+        @* Create a placeholder for the Partial View to render *@
+        <div id="LocationCreate">
+            @Html.Partial("LocationCreate", new ReservationFinal.DATA.EF.Location())
         </div>
+    }
+
+
+
+    <div class="table-responsive-md">
+        <table class="table table-striped locationsTable" id="dataTable">
+            <thead class="bg-dark text-white">
+                <tr>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ZipCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationLimit)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr id="Location-@item.LocationID">
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ZipCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReservationLimit)
+                    </td>
+                    <td class="text-center">
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                            @:&nbsp;
+                            @Html.ActionLink("Delete", "Delete", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                            @:&nbsp;
+                        }
+
+                        @Html.ActionLink("Details", "Details", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+        <div id="LocationEdit"></div>
     </div>
+</div>
 
 @section scripts
 {
@@ -145,19 +150,96 @@
                     // Reset the form
                     $("#LocationCreateForm")[0].reset();
                     // Add the row with the code below
-                    $(function () {
-                        var row = "<tr>" +
-                            "<td>" + s.LocationName + "</td>" +
-                            "<td>" + s.Address + "</td>" +
-                            "<td>" + s.City + "</td>" +
-                            "<td>" + s.State + "</td>" +
-                            "<td>" + s.ReservationLimit + "</td>" +
-                            "<td>Refresh to View Options</td></tr>";
-                        $(".locationsTable").append(row);
-                    });
+                    //$(function () {
+                    //    var row = "<tr>" +
+                    //        "<td>" + s.LocationName + "</td>" +
+                    //        "<td>" + s.Address + "</td>" +
+                    //        "<td>" + s.City + "</td>" +
+                    //        "<td>" + s.State + "</td>" +
+                    //        "<td>" + s.ReservationLimit + "</td>" +
+                    //        "<td>Refresh to View Options</td></tr>";
+                    //    $(".locationsTable").append(row);
+                    //}); unneeded because page is being automatically reloaded.
+                    location.reload();
                 }
             });
         });
+
+        //*********************AJAX EDIT********************\\
+
+        //var originalContent = null;
+        //$('a.EditLink').on("click", function (e) {
+        //    e.preventDefault(); //Keeps the page from refreshing
+        //    console.log("Hello");
+        //    var locationID = $(this).attr("id");
+        //    var row = $("#Location-" + locationID).children(); //Finds all the table data for that SPECIFIC row
+
+        //    //Assemble a JSON object that holds all the values from that row
+        //    originalContent = {
+        //        LocId: locationID,
+        //        LocName: row[1].innerText,
+        //        Address: row[2].innerText,
+        //        City: row[3].innerText,
+        //        State: row[4].innerText,
+        //        Zip: row[5].innerText,
+        //        Limit: row[6].innerText
+
+        //    };
+        //    console.log(originalContent);
+
+        //    $.get("/Locations/LocationEdit/" + locationID, function (data) {
+        //        $('#Location-' + locationID).replaceWith(
+        //            '<tr id="Location-' + locationID + '"><td colspan = "5">' + data + '</td></tr>'
+        //        );
+        //    });
+        //});
+        //$(document).on('click', '#saveUpdate', function () {
+        //    //The code here is the post functionality
+
+        //    //Serialize the data from the form
+        //    var formData = $('#LocationEditForm').serializeArray();
+
+        //    //Display a message to the user in #MessageContent
+        //    $('#MessageContent').html('<div class = "alert alert-info">Please wait...</div>');
+
+        //    //Call Ajax function to deal with posting that data to the server (Handling the UI in the event of a post)
+        //    $.ajax({
+        //        url: "/Locations/AjaxEdit",
+        //        type: "POST",
+        //        data: formData,
+        //        datatype: "json",
+        //        success: function (data) {
+        //            //Change #MessageContent to display that the result succeeded in the edit
+        //            $("#MessageContent").html('<div class="alert alert-success">Your record was successfully updated</div>');
+        //            $("#LocationEditForm")[0].reset();
+
+        //            //$(function () {
+        //            //    var row = '<tr>' +
+        //            //        '<td>' + data.LocationName + '</td>' +
+        //            //        '<td>' + data.Address + '</td>' +
+        //            //        '<td>' + data.City + '</td>' +
+        //            //        '<td>' + data.State + '</td>' +
+        //            //        '<td>' + data.ZipCode + '</td>' +
+        //            //        '<td>' + data.ReservationLimit + '</td>' +
+        //            //        '<td>Refresh to View Options</td>' +
+        //            //        '</tr>';
+
+        //            //    $('#Publisher-' + data.PublisherID).replaceWith(row);
+        //            //}); unneeded because page is being reloaded
+        //            location.reload();
+        //        },
+        //        error: function (e) {
+        //            $("#MessageContent").html('<div class="alert alert-warning">There was an error. Please try again or contact the site admin.</div>');
+        //            $(function () {
+        //                var row = '<tr id="Location-' + originalContent.LocId + '">' +
+        //                    '<td>Refresh to View Options</td>' +
+        //                    '</tr>';
+
+        //                $('#Location-' + data.locationID).replaceWith(row);
+        //            });
+        //        }
+        //    });
+        //});
     </script>
 
 }
