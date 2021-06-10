@@ -27,7 +27,7 @@
     </div>
 
     <div class="table-responsive-md">
-        <table class="table table-striped" id="dataTable">
+        <table class="table table-striped reservationsTable" id="dataTable">
             <thead class="bg-dark text-white">
                 <tr>
                     <th>
@@ -109,24 +109,25 @@
                 data: formData,
                 datatype: "json",
                 error: function (e) {
-                    $("#MessageContent").html("<div class = 'alert alert-danger'>There was a problem!</div>")
+                    $("#MessageContent").html("<div class = 'alert alert-danger'>Reservations full on that date at that location. Please try a different date or location.</div>")
                 },
                 success: function (s) {
-                    $("#MessageContent").html("<div class = 'alert alert-success'>Record Added!</div>")
+                    //$("#MessageContent").html("<div class = 'alert alert-success'></div>");
                     // Reset the form
                     $("#ReservationCreateForm")[0].reset();
+                    location.reload();
                     // Add the row with the code below
                     //$(function () {
-                    //    var row = "<tr>" +
-                    //        "<td>" + s.LocationName + "</td>" +
-                    //        "<td>" + s.Address + "</td>" +
-                    //        "<td>" + s.City + "</td>" +
-                    //        "<td>" + s.State + "</td>" +
-                    //        "<td>" + s.ReservationLimit + "</td>" +
-                    //        "<td>Refresh to View Options</td></tr>";
-                    //    $(".locationsTable").append(row);
+                    //var row = "<tr>" + "<td>Refresh to View Options</td></tr>";
+                    ////        "<td>" + s.LocationName + "</td>" +
+                    ////        "<td>" + s.Address + "</td>" +
+                    ////        "<td>" + s.City + "</td>" +
+                    ////        "<td>" + s.State + "</td>" +
+                    ////        "<td>" + s.ReservationLimit + "</td>" +
+                    ////        
+                    //    $(".reservationsTable").append(row);
                     //}); unneeded because page is being automatically reloaded.
-                    location.reload();
+                    //$('#Reservation-' + data.ReservationID).replaceWith(row);
                 }
             });
         });

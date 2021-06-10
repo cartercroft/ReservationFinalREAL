@@ -18,17 +18,20 @@ namespace ReservationFinal.MVC.UI.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
-            ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments, "OwnerInstrumentID", "InstrumentName");
+            var currentUser = User.Identity.GetUserId();
+
             if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
             {
-               var reservations = db.Reservations.Include(r => r.Location).Include(r => r.OwnerInstrument);
+                ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+                ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments, "OwnerInstrumentID", "InstrumentName");
+                var reservations = db.Reservations.Include(r => r.Location).Include(r => r.OwnerInstrument);
                return View(reservations.ToList());
             }
 
             else
             {
-                var currentUser = User.Identity.GetUserId();
+                ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
+                ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments.Where(o => o.OwnerID == currentUser), "OwnerInstrumentID", "InstrumentName");
                 var reservations = db.Reservations.Where(u => u.OwnerInstrument.OwnerID == currentUser);
                 return View(reservations.ToList());
             }
@@ -54,9 +57,26 @@ namespace ReservationFinal.MVC.UI.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult AjaxCreate(Reservation reservation)
         {
-            db.Reservations.Add(reservation);
-            db.SaveChanges();
-            return Json(reservation);
+            if (ModelState.IsValid)
+            {
+                var location = db.Locations.AsNoTracking().Where(l => l.LocationID == reservation.LocationID).FirstOrDefault();
+
+                if (location.Reservations.Where(r => r.ReservationDate == reservation.ReservationDate).ToList().Count >= location.ReservationLimit && !User.IsInRole("Admin"))
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    db.Reservations.Add(reservation);
+                    db.SaveChanges();
+                }
+            }
+
+            return Json(new {
+            Location = reservation.LocationID,
+            Instrument = reservation.OwnerInstrumentID,
+            Date = reservation.ReservationDate
+            });
         }
         #endregion
         // GET: Reservations/Create
