@@ -68,8 +68,10 @@
                         <td class="text-center">
                             @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" }) 
+                                @:&nbsp;
                                 @Html.ActionLink("Delete", "Delete", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                                @:&nbsp;
                             }
 
                             @Html.ActionLink("Details", "Details", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
