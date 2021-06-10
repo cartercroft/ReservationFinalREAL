@@ -196,6 +196,7 @@
     <Content Include="Content\images\brokenPiano.jpg" />
     <Content Include="Content\images\brokenPianoPersonless.jpg" />
     <Content Include="Content\images\error.jpg" />
+    <Content Include="Content\images\headerBackground.png" />
     <Content Include="Content\instImages\noImage.png" />
     <Content Include="Content\instImages\t_noImage.png" />
     <Content Include="favicon.ico" />

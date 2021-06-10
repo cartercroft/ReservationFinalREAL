@@ -97,7 +97,13 @@
     <script>
         $(document).ready(function () {
              $('#dataTable').DataTable({
-                responsive: true
+                 responsive: true,
+                 "language": {
+                     "emptyTable": "You haven't added an instrument yet!"
+                 },
+                 columnDefs: [
+                     { orderable: false, targets: [1, 3] }
+                 ]
             });
         });
     </script>

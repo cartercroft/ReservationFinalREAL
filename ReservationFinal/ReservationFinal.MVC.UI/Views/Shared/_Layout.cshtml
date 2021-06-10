@@ -31,7 +31,7 @@
                     {
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">All Instruments</a></li>
                     }
-                    else
+                    else if(Request.IsAuthenticated)
                     {
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">Your Instruments</a></li>
                     }
@@ -45,7 +45,7 @@
         </div>
     </nav>
     <!-- Header - set the background image for the header in the line below-->
-    <header class="bg-image-full bgroundImg" style="background-image: url('/Content/images/brokenCymbal.jpeg')">
+    <header class="bg-image-full bgroundImg" style="background-image: url('/Content/images/headerBackground.png')">
         <div class="text-center my-5">
             @*<img class="img-fluid rounded-circle mb-4" src="https://dummyimage.com/150x150/6c757d/dee2e6.jpg" alt="..." />*@
             <h1 class="text-primary fw-bolder headerTitle">FixIt4U</h1>

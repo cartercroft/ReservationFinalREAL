@@ -59,7 +59,10 @@
     <script>
         $(document).ready(function () {
              $('#dataTable').DataTable({
-                responsive: true
+                responsive: true,
+                 "language": {                     
+                     "emptyTable": "You have no reservations. Be sure to <a class='text-dark' href='/OwnerInstruments/Create/'><b>add an instrument</b></a> first."
+                 }
             });
         });
     </script>
