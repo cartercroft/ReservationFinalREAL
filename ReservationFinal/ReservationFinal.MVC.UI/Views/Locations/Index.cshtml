@@ -4,86 +4,101 @@
     ViewBag.Title = "Locations";
 }
 
-<div class="container">
-    <h2 class="viewHeader">@ViewBag.Title</h2>
+@section htmlHead
+            {
+    @* ADDED jQueryUI CSS CDN - note: themenames are swappable.*@
+    @*NOTE, Module 5 AJAX: find names at jqueryui.com/themeroller, gallyery tab (like excite-bike, south-street or sunny)*@
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css">
+}
 
-    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
-    {
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
-        </p>
+    <div class="container">
+        <h2 class="viewHeader">@ViewBag.Title</h2>
+        <div id="MessageContent"></div>
+        @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+        {
 
-    }
+            <!-- Output element for our success or failure message to show to the user -->
+
+            <p>
+                @*@Html.ActionLink("Create New", "Create")*@
+                <button id="toggleLocationCreate" class="btn btn-primary text-right">Create New</button>
+            </p>
+
+            @* Create a placeholder for the Partial View to render *@
+            <div id="LocationCreate">
+                @Html.Partial("LocationCreate", new ReservationFinal.DATA.EF.Location())
+            </div>
+        }
 
 
 
-    <div class="table-responsive-md">
-        <table class="table table-striped" id="dataTable">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LocationName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.City)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.State)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ZipCode)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ReservationLimit)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <div class="table-responsive-md">
+            <table class="table table-striped locationsTable" id="dataTable">
+                <thead class="bg-dark text-white">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LocationName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.State)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ZipCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ReservationLimit)
-                        </td>
-                        <td class="text-center">
-                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" }) 
-                                @:&nbsp;
-                                @Html.ActionLink("Delete", "Delete", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
-                                @:&nbsp;
-                            }
-
-                            @Html.ActionLink("Details", "Details", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
-
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LocationName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.State)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ZipCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReservationLimit)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="Location-@item.LocationID">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LocationName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.State)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZipCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationLimit)
+                            </td>
+                            <td class="text-center">
+                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                                    @:&nbsp;
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+                                    @:&nbsp;
+                                }
+
+                                @Html.ActionLink("Details", "Details", new { id = item.LocationID }, new { @class = "btn btn-sm btn-dark" })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
     </div>
-</div>
 
 @section scripts
 {
@@ -91,9 +106,58 @@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script>
         $(document).ready(function () {
-             $('#dataTable').DataTable({
+            $('#dataTable').DataTable({
                 responsive: true
             });
         });
     </script>
+
+    <!-- AJAX BELOW -->
+    <!--ADDEDjQuery UI CDN-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- ADDED jQuery Ajax CDN-->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        //***************AJAX CREATE***************\\
+        //Show the create form
+        $('#LocationCreate').hide(); //Start the page load with the create form hidden
+        $('#toggleLocationCreate').click(function () {
+            $('#LocationCreate').toggle(); //Flip the create form between hidden and visible
+        });
+
+        $('#LocationCreateForm').submit(function (e) {
+            var formData = $(this).serializeArray(); // Capturing all of the inputs from the form and storing them in a JSON array
+            console.log(formData);
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Locations/AjaxCreate",
+                type: "POST",
+                data: formData,
+                datatype: "json",
+                error: function (e) {
+                    $("#MessageContent").html("<div class = 'alert alert-danger'>There was a problem!</div>")
+                },
+                success: function (s) {
+                    $("#MessageContent").html("<div class = 'alert alert-success'>Record Added!</div>")
+                    // Reset the form
+                    $("#LocationCreateForm")[0].reset();
+                    // Add the row with the code below
+                    $(function () {
+                        var row = "<tr>" +
+                            "<td>" + s.LocationName + "</td>" +
+                            "<td>" + s.Address + "</td>" +
+                            "<td>" + s.City + "</td>" +
+                            "<td>" + s.State + "</td>" +
+                            "<td>" + s.ReservationLimit + "</td>" +
+                            "<td>Refresh to View Options</td></tr>";
+                        $(".locationsTable").append(row);
+                    });
+                }
+            });
+        });
+    </script>
+
 }

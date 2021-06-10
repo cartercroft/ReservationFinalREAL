@@ -58,6 +58,15 @@ namespace ReservationFinal.MVC.UI.Controllers
             return View(location);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult AjaxCreate(Location loc)
+        {
+            db.Locations.Add(loc);
+            db.SaveChanges();
+            return Json(loc);
+        }
+
         // GET: Locations/Edit/5
         public ActionResult Edit(int? id)
         {
