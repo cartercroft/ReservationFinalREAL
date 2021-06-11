@@ -13,8 +13,7 @@
     <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="~/Content/css/styles.css" rel="stylesheet" />
-    <link href="~/Content/custom.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
     @RenderSection("htmlHead", required: false)
 </head>
 <body>
@@ -81,9 +80,8 @@
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script>
-    <!-- Core theme JS-->
-    <script src="~/Scripts/js/scripts.js"></script>
+            crossorigin="anonymous"></script>   
+
     @RenderSection("scripts", required: false)
 
     <script>
