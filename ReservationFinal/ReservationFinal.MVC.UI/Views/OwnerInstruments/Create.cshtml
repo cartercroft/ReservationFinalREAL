@@ -8,7 +8,6 @@
 
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
-
     @using (Html.BeginForm("Create", "OwnerInstruments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()

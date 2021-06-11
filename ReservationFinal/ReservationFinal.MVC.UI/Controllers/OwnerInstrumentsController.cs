@@ -27,6 +27,7 @@ namespace ReservationFinal.MVC.UI.Controllers
             {
                 ownerInstruments = db.OwnerInstruments.Include(o => o.InstrumentType).Include(o => o.UserDetail);
             }
+            ViewBag.InstrumentsCount = db.OwnerInstruments.Where(i => i.IsActive && i.OwnerID == currentUser).Count();
             return View(ownerInstruments.ToList());
         }
 

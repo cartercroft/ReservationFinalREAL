@@ -10,11 +10,16 @@
     {
         ViewBag.Title = "Your Instruments";
     }
-
+    var currentUser = User.Identity.GetUserId();
 }
 
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
+
+    @if (ViewBag.InstrumentsCount == 0)
+    {
+        <h3 class="text-center text-danger">You currently have no active instruments!</h3>
+    }
 
     <p>
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })

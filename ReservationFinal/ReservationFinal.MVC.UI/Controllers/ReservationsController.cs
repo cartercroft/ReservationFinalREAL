@@ -19,8 +19,9 @@ namespace ReservationFinal.MVC.UI.Controllers
         public ActionResult Index()
         {
             var currentUser = User.Identity.GetUserId();
+            var assets = db.OwnerInstruments.Where(i => i.OwnerID == currentUser && i.IsActive).Count();
 
-            if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
+            if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin"))) //If user is admin or employee, show all reservations
             {
                 ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
                 ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments, "OwnerInstrumentID", "InstrumentName");
@@ -28,12 +29,18 @@ namespace ReservationFinal.MVC.UI.Controllers
                return View(reservations.ToList());
             }
 
-            else
+            else if (assets != 0) //If user is not a Employee/Admin AND they have active assets, show only their reservations
             {
                 ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
                 ViewBag.OwnerInstrumentID = new SelectList(db.OwnerInstruments.Where(o => o.OwnerID == currentUser), "OwnerInstrumentID", "InstrumentName");
                 var reservations = db.Reservations.Where(u => u.OwnerInstrument.OwnerID == currentUser);
+                ViewBag.InstrumentsCount = db.OwnerInstruments.Where(i => i.IsActive && i.OwnerID == currentUser);
                 return View(reservations.ToList());
+            }
+
+            else //The user has no active assets, send them to the Create Asset View.
+            {
+                return RedirectToAction("Create", "OwnerInstruments");
             }
         }
 
