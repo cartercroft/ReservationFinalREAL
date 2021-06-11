@@ -63,6 +63,8 @@ namespace ReservationFinal.MVC.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OwnerInstrumentID,InstrumentName,OwnerID,InstrumentPhoto,SpecialNotes,IsActive,DateAdded,InstrumentTypeID")] OwnerInstrument ownerInstrument, HttpPostedFileBase instrumentPhoto)
         {
+            var currentUser = User.Identity.GetUserId();
+            bool isFirst = false;
             if (ModelState.IsValid)
             {
                 #region File Upload
@@ -97,14 +99,23 @@ namespace ReservationFinal.MVC.UI.Controllers
                 // No matter what, update the photoUrl with the value of the file variable
                 ownerInstrument.InstrumentPhoto = file;
                 #endregion
+                if (db.OwnerInstruments.Where(i => i.OwnerID == currentUser).Count() == 0)
+                {
+                    isFirst = true;
+                }
                 db.OwnerInstruments.Add(ownerInstrument);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
             ViewBag.InstrumentTypeID = new SelectList(db.InstrumentTypes, "InstrumentTypeID", "InstrumentTypeName", ownerInstrument.InstrumentTypeID);
             ViewBag.OwnerID = new SelectList(db.UserDetails, "UserID", "FirstName", ownerInstrument.OwnerID);
-            return View(ownerInstrument);
+
+            if (isFirst)
+            {
+                return RedirectToAction("Create", "Reservations");
+            }
+
+            return RedirectToAction("Index");
         }
         // GET: OwnerInstruments/Edit/5
         public ActionResult Edit(int? id)

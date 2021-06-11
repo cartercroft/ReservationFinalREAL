@@ -94,10 +94,10 @@
                     $("#MessageContent").html("<div class = 'alert alert-danger'>Reservations full on that date at that location. Please try a different date or location.</div>")
                 },
                 success: function (s) {
-                    //$("#MessageContent").html("<div class = 'alert alert-success'></div>");
+                    $("#MessageContent").html("<div class = 'alert alert-success'>Successfully added Instrument Type. Refreshing...</div>");
                     // Reset the form
                     $("#InstrumentTypeCreateForm")[0].reset();
-                    location.reload();
+                    setInterval('location.reload()', 1000);
                     // Add the row with the code below
                     //$(function () {
                     //var row = "<tr>" + "<td>Refresh to View Options</td></tr>";

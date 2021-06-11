@@ -12,6 +12,16 @@ namespace ReservationFinal.MVC.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("UnauthorizedIndex");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult UnauthorizedIndex()
+        {
             return View();
         }
 

@@ -52,7 +52,23 @@
                         <td class="text-center">
                             @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
                             @Html.ActionLink("Details", "Details", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
+                            @if (item.ReservationDate - DateTime.Now.Date < TimeSpan.FromDays(7) && !User.IsInRole("Admin"))
+                            {
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark", disabled = "true" })*@
+                                <button class="btn btn-sm text-white deleteDisabled" title="You are unable to delete reservations within a week of the Reservation Date. Contact an admin if you really want to delete this reservation." data-toggle="tooltip" data-placement="top">Delete</button>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
+                            }
+                            @if (User.IsInRole("Employee"))
+                            {
+                                @Html.ActionLink("Edit Instrument Notes", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                            }
+                            else if (User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Edit Instrument", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                            }
                         </td>
                     </tr>
                 }
@@ -63,6 +79,9 @@
 
 @section scripts
 {
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script>
@@ -74,6 +93,10 @@
                 }
             });
         });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 
     <!-- AJAX BELOW -->
@@ -105,10 +128,10 @@
                     $("#MessageContent").html("<div class = 'alert alert-danger'>Reservations full on that date at that location. Please try a different date or location.</div>")
                 },
                 success: function (s) {
-                    //$("#MessageContent").html("<div class = 'alert alert-success'></div>");
+                    $("#MessageContent").html("<div class = 'alert alert-success'>Successfully added Reservation. Refreshing...</div>");
                     // Reset the form
                     $("#ReservationCreateForm")[0].reset();
-                    location.reload();
+                    setInterval('location.reload()', 1000);
                     // Add the row with the code below
                     //$(function () {
                     //var row = "<tr>" + "<td>Refresh to View Options</td></tr>";
@@ -117,7 +140,7 @@
                     ////        "<td>" + s.City + "</td>" +
                     ////        "<td>" + s.State + "</td>" +
                     ////        "<td>" + s.ReservationLimit + "</td>" +
-                    ////        
+                    ////
                     //    $(".reservationsTable").append(row);
                     //}); unneeded because page is being automatically reloaded.
                     //$('#Reservation-' + data.ReservationID).replaceWith(row);

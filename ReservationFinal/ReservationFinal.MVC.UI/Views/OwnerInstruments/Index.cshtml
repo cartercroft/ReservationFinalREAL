@@ -85,7 +85,14 @@
                                 @:&nbsp;
                                 @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
                                 @:&nbsp;
-                                @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                if (item.IsActive)
+                                {
+                                    @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Reactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })                               }
+
                             }
                         </td>
                     </tr>

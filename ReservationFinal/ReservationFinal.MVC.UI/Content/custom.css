@@ -133,3 +133,11 @@ td.child:hover {
 table.dataTable{
     border-bottom: 0 !important;
 }
+
+ button.deleteDisabled {
+    background-color: rgb(111,114,117);
+}
+
+button.deleteDisabled:hover{
+    cursor: default;
+}

@@ -139,9 +139,10 @@
                     $("#MessageContent").html("<div class = 'alert alert-danger'>There was a problem!</div>")
                 },
                 success: function (s) {
-                    $("#MessageContent").html("<div class = 'alert alert-success'>Record Added!</div>")
+                    $("#MessageContent").html("<div class = 'alert alert-success'>Successfully added Location. Refreshing...</div>")
                     // Reset the form
                     $("#LocationCreateForm")[0].reset();
+                    setInterval('location.reload()', 1000);
                     // Add the row with the code below
                     //$(function () {
                     //    var row = "<tr>" +
@@ -153,7 +154,6 @@
                     //        "<td>Refresh to View Options</td></tr>";
                     //    $(".locationsTable").append(row);
                     //}); unneeded because page is being automatically reloaded.
-                    location.reload();
                 }
             });
         });

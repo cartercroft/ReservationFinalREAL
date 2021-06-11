@@ -164,8 +164,8 @@ namespace ReservationFinal.MVC.UI.Controllers
                     ReservationFinalEntities db = new ReservationFinalEntities();
                     db.UserDetails.Add(newUserDeets);
                     db.SaveChanges();
-
-                    return View("Login");
+                    await SignInManager.SignInAsync(user, false, false);
+                    return RedirectToAction("Create", "OwnerInstruments");
                     #endregion
                     //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
