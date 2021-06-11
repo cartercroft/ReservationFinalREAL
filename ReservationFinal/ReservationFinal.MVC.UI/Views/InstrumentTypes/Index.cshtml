@@ -9,7 +9,7 @@
 
     <div id="MessageContent"></div>
 
-    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+    @if (Request.IsAuthenticated && (User.IsInRole("Admin")))
     {
 
 

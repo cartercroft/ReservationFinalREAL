@@ -10,7 +10,7 @@ using ReservationFinal.DATA.EF;
 
 namespace ReservationFinal.MVC.UI.Controllers
 {
-    [Authorize(Roles = "Admin, Employee")]
+    [Authorize(Roles = "Admin")]
     public class InstrumentTypesController : Controller
     {
         private ReservationFinalEntities db = new ReservationFinalEntities();
@@ -39,7 +39,6 @@ namespace ReservationFinal.MVC.UI.Controllers
         #region AJAX
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public JsonResult AjaxCreate(InstrumentType type)
         {
             db.InstrumentTypes.Add(type);
