@@ -284,6 +284,7 @@
     <Content Include="Views\Locations\LocationCreate.cshtml" />
     <Content Include="Views\Locations\LocationEdit.cshtml" />
     <Content Include="Views\Reservations\ReservationCreate.cshtml" />
+    <Content Include="Views\InstrumentTypes\InstrumentTypeCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

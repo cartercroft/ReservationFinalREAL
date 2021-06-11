@@ -7,9 +7,23 @@
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
-    </p>
+    <div id="MessageContent"></div>
+
+    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
+    {
+
+
+        <p>
+            @*@Html.ActionLink("Create New", "Create")*@
+            <button id="toggleInstrumentTypeCreate" class="btn btn-primary">Create New</button>
+        </p>
+
+        @* Create a placeholder for the Partial View to render *@
+        <div id="InstrumentTypeCreate">
+            @Html.Partial("InstrumentTypeCreate", new ReservationFinal.DATA.EF.InstrumentType())
+        </div>
+    }
+
     <div class="table-responsive-md">
         <table class="table table-striped" id="dataTable">
             <thead class="bg-dark text-white">
@@ -47,9 +61,58 @@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script>
         $(document).ready(function () {
-             $('#dataTable').DataTable({
+            $('#dataTable').DataTable({
                 responsive: true
             });
         });
     </script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- ADDED jQuery Ajax CDN-->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        //***************AJAX CREATE***************\\
+        //Show the create form
+        $('#InstrumentTypeCreate').hide(); //Start the page load with the create form hidden
+        $('#toggleInstrumentTypeCreate').click(function () {
+            $('#InstrumentTypeCreate').toggle(); //Flip the create form between hidden and visible
+        });
+
+        $('#InstrumentTypeCreateForm').submit(function (e) {
+            var formData = $(this).serializeArray(); // Capturing all of the inputs from the form and storing them in a JSON array
+            console.log(formData);
+            e.preventDefault();
+
+            $.ajax({
+                url: "/InstrumentTypes/AjaxCreate",
+                type: "POST",
+                data: formData,
+                datatype: "json",
+                error: function (e) {
+                    $("#MessageContent").html("<div class = 'alert alert-danger'>Reservations full on that date at that location. Please try a different date or location.</div>")
+                },
+                success: function (s) {
+                    //$("#MessageContent").html("<div class = 'alert alert-success'></div>");
+                    // Reset the form
+                    $("#InstrumentTypeCreateForm")[0].reset();
+                    location.reload();
+                    // Add the row with the code below
+                    //$(function () {
+                    //var row = "<tr>" + "<td>Refresh to View Options</td></tr>";
+                    ////        "<td>" + s.LocationName + "</td>" +
+                    ////        "<td>" + s.Address + "</td>" +
+                    ////        "<td>" + s.City + "</td>" +
+                    ////        "<td>" + s.State + "</td>" +
+                    ////        "<td>" + s.ReservationLimit + "</td>" +
+                    ////
+                    //    $(".reservationsTable").append(row);
+                    //}); unneeded because page is being automatically reloaded.
+                    //$('#Reservation-' + data.ReservationID).replaceWith(row);
+                }
+            });
+        });
+    </script>
+}
 }

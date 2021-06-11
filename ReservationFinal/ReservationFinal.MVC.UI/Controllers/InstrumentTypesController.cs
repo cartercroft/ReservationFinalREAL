@@ -36,6 +36,18 @@ namespace ReservationFinal.MVC.UI.Controllers
             return View(instrumentType);
         }
 
+        #region AJAX
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public JsonResult AjaxCreate(InstrumentType type)
+        {
+            db.InstrumentTypes.Add(type);
+            db.SaveChanges();
+            return Json(type);
+        }
+        #endregion
+
         // GET: InstrumentTypes/Create
         public ActionResult Create()
         {
