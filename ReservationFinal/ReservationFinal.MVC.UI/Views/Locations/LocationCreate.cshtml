@@ -1,6 +1,6 @@
 ﻿@model ReservationFinal.DATA.EF.Location
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { id = "LocationCreateForm" })) 
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "LocationCreateForm", @class = "bg-dark text-white p-3 rounded-3 mb-2" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -62,5 +62,4 @@
             </div>
         </div>
     </div>
-    <hr />  
 }

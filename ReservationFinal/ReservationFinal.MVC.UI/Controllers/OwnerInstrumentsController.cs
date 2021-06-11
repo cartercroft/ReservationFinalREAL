@@ -49,8 +49,10 @@ namespace ReservationFinal.MVC.UI.Controllers
         // GET: OwnerInstruments/Create
         public ActionResult Create()
         {
+            var currentUser = User.Identity.GetUserId();
             ViewBag.InstrumentTypeID = new SelectList(db.InstrumentTypes, "InstrumentTypeID", "InstrumentTypeName");
             ViewBag.OwnerID = new SelectList(db.UserDetails, "UserID", "FirstName");
+            ViewBag.InstrumentsCount = db.OwnerInstruments.Where(i => i.IsActive && i.OwnerID == currentUser).Count();
             return View();
         }
 

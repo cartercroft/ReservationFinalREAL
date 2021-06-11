@@ -1,6 +1,6 @@
 ﻿@model ReservationFinal.DATA.EF.InstrumentType
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { id = "InstrumentTypeCreateForm" }))
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "InstrumentTypeCreateForm", @class = "bg-dark text-white p-2 pl-3 rounded-3 mb-2" }))
 {
     @Html.AntiForgeryToken()
     
@@ -22,5 +22,4 @@
             </div>
         </div>
     </div>
-    <hr />
 }

@@ -1,6 +1,6 @@
 ﻿@model ReservationFinal.DATA.EF.Reservation
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { id = "ReservationCreateForm" }))
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "ReservationCreateForm", @class = "bg-dark text-white p-2 rounded-3 mb-2" }))
 {
     @Html.AntiForgeryToken()
     
@@ -38,5 +38,4 @@
             </div>
         </div>
     </div>
-    <hr />  
 }

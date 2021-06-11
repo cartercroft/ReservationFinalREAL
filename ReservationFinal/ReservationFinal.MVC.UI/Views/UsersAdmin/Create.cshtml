@@ -6,10 +6,10 @@
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
 
-    @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal bg-dark text-white p-2 rounded-3", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <h4>Create a new account.</h4>
+        <h4>Create a new User</h4>
         <hr />
         @Html.ValidationSummary("", new { @class = "text-error" })
         <div class="form-group">
