@@ -1,7 +1,9 @@
-﻿@model IEnumerable<ReservationFinal.DATA.EF.Reservation>
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<ReservationFinal.DATA.EF.Reservation>
 
 @{
     ViewBag.Title = "Reservations";
+    var currentUser = User.Identity.GetUserId();
 }
 
 <div class="container">
@@ -59,15 +61,16 @@
                         <td class="text-center">
                             @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
                             @Html.ActionLink("Details", "Details", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
-                            @if (item.ReservationDate - DateTime.Now.Date < TimeSpan.FromDays(7) && !User.IsInRole("Admin"))
+                            @if (item.ReservationDate - DateTime.Now.Date <= TimeSpan.FromDays(7) && !User.IsInRole("Admin") && !User.IsInRole("Employee"))
                             {
                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark", disabled = "true" })*@
                                 <button class="btn btn-sm text-white deleteDisabled" title="You are unable to delete reservations within a week of the Reservation Date. Contact an admin if you really want to delete this reservation." data-toggle="tooltip" data-placement="top">Delete</button>
                             }
-                            else
+                            else if(User.IsInRole("Admin") || item.OwnerInstrument.OwnerID == currentUser)
                             {
                                 @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
                             }
+
                             @if (User.IsInRole("Employee"))
                             {
                                 @Html.ActionLink("Edit Instrument Notes", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
