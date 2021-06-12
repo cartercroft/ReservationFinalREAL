@@ -7,7 +7,7 @@
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { @class = "bg-dark text-white rounded-3 p-2" }))
     {
         @Html.AntiForgeryToken()
 
@@ -45,9 +45,8 @@
                 </div>
             </div>
         </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "text-white" })
+        </div>
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </div>

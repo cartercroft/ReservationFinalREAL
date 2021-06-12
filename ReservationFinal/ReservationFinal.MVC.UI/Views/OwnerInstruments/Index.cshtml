@@ -21,9 +21,10 @@
         <h3 class="text-center text-danger">You currently have no active instruments!</h3>
     }
 
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
-    </p>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
+            @*@Html.ActionLink("To Reservations", "Index", "Reservations", null, new { @class = "btn btn-dark" })*@
+        </p>
     <div class="table-responsive-md">
         <table class="table table-striped" id="dataTable">
             <thead class="bg-dark text-white">
@@ -81,10 +82,8 @@
                             }
                             else
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
-                                @:&nbsp;
-                                @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
-                                @:&nbsp;
+                                @Html.ActionLink("Edit", "Edit", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark mr-1" })
+                                @Html.ActionLink("Details", "Details", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark mr-1" })
                                 if (item.IsActive)
                                 {
                                     @Html.ActionLink("Deactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
