@@ -9,9 +9,6 @@
     <title>FixIt4U | @ViewBag.Title</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" />
-    <!--DataTables CSS-->
-    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     @Styles.Render("~/Content/css")
     @RenderSection("htmlHead", required: false)
@@ -84,7 +81,6 @@
             crossorigin="anonymous"></script>   
 
     @RenderSection("scripts", required: false)
-
     <script>
         $(function () {
             $('.navbar-nav > li a').each(function () {

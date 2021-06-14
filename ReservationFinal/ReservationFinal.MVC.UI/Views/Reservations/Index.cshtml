@@ -61,23 +61,23 @@
                         <td class="text-center">
                             @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
                             @Html.ActionLink("Details", "Details", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
-                            @if (item.ReservationDate - DateTime.Now.Date <= TimeSpan.FromDays(7) && !User.IsInRole("Admin") && !User.IsInRole("Employee"))
+                            @if (item.ReservationDate - DateTime.Now.Date <= TimeSpan.FromDays(7) && (User.IsInRole("Customer") || User.IsInRole("Employee")) && item.OwnerInstrument.OwnerID == currentUser)
                             {
                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark", disabled = "true" })*@
                                 <button class="btn btn-sm text-white deleteDisabled" title="You are unable to delete reservations within a week of the Reservation Date. Contact an admin if you really want to delete this reservation." data-toggle="tooltip" data-placement="top">Delete</button>
                             }
-                            else if(User.IsInRole("Admin") || item.OwnerInstrument.OwnerID == currentUser)
+                            else if (User.IsInRole("Admin") || item.OwnerInstrument.OwnerID == currentUser)
                             {
                                 @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID }, new { @class = "btn btn-sm btn-dark" })
                             }
 
                             @if (User.IsInRole("Employee"))
                             {
-                                @Html.ActionLink("Edit Instrument Notes", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                @Html.ActionLink("Edit Notes", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark", id = "editButton" })
                             }
                             else if (User.IsInRole("Admin"))
                             {
-                                @Html.ActionLink("Edit Instrument", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })
+                                @Html.ActionLink("Edit Instrument", "Edit", "OwnerInstruments", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark", id = "editButton" })
                             }
                         </td>
                     </tr>
@@ -89,11 +89,8 @@
 
 @section scripts
 {
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    @Scripts.Render("~/Scripts/DataTables.js")
+    @Scripts.Render("~/Scripts/Ajax.js")
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
@@ -110,11 +107,6 @@
     </script>
 
     <!-- AJAX BELOW -->
-    <!--ADDEDjQuery UI CDN-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- ADDED jQuery Ajax CDN-->
-    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
 
     <script>
         //***************AJAX CREATE***************\\

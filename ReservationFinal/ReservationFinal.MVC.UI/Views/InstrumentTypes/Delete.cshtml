@@ -6,7 +6,7 @@
 
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
-    <div>
+    <div class="bg-dark text-white rounded-3 p-2">
         <h4>Instrument Type</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -26,7 +26,7 @@
 
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-danger" /> |
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "text-white"})
             </div>
         }
     </div>

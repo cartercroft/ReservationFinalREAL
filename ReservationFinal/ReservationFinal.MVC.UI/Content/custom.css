@@ -148,3 +148,32 @@ button.deleteDisabled:hover{
 td a.btn-dark{
     margin-right: .3em;
 }
+
+td button{
+    margin-right: .3em;
+}
+
+a.paginate_button.next, a.paginate_button.previous{
+    background: rgb(86,112,179) !important;
+    border-color: whitesmoke !important;
+}
+
+    a.paginate_button.disabled {
+        background-color: rgba(86,112,179, .7) !important;
+        color: lightgray !important;
+    }
+
+@media(max-width: 376px)
+{
+    #editButton{
+        margin-left: 35.33%;
+        margin-top: 2%;
+    }
+}
+
+@media(max-width: 321px) {
+    #editButton {
+        margin-left: 42.2%;
+        margin-top: 2%;
+    }
+}

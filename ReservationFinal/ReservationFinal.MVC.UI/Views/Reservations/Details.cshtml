@@ -7,7 +7,7 @@
 <div class="container">
     <h2 class="viewHeader">@ViewBag.Title</h2>
 
-    <div>
+    <div class="bg-dark text-white rounded-3 p-2">
         <h4>Reservation</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -38,15 +38,16 @@
             <dt>
                 Instrument Notes:
             </dt>
-            
+
             <dd>
                 @Html.DisplayFor(model => model.OwnerInstrument.SpecialNotes)
             </dd>
 
         </dl>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }, new { @class = "text-white" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "text-white" })
+        </p>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 </div>

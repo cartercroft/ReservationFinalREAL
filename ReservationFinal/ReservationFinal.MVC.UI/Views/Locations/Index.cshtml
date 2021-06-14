@@ -100,8 +100,8 @@
 
 @section scripts
 {
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+@Scripts.Render("~/Scripts/DataTables.js")
+@Scripts.Render("~/Scripts/Ajax.js")
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
@@ -111,11 +111,6 @@
     </script>
 
     <!-- AJAX BELOW -->
-    <!--ADDEDjQuery UI CDN-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- ADDED jQuery Ajax CDN-->
-    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
 
     <script>
         //***************AJAX CREATE***************\\

@@ -21,10 +21,10 @@
         <h3 class="text-center text-danger">You currently have no active instruments!</h3>
     }
 
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
-            @*@Html.ActionLink("To Reservations", "Index", "Reservations", null, new { @class = "btn btn-dark" })*@
-        </p>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-md btn-primary" })
+        @*@Html.ActionLink("To Reservations", "Index", "Reservations", null, new { @class = "btn btn-dark" })*@
+    </p>
     <div class="table-responsive-md">
         <table class="table table-striped" id="dataTable">
             <thead class="bg-dark text-white">
@@ -90,7 +90,7 @@
                                 }
                                 else
                                 {
-                                    @Html.ActionLink("Reactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })                               }
+                                    @Html.ActionLink("Reactivate", "Delete", new { id = item.OwnerInstrumentID }, new { @class = "btn btn-sm btn-dark" })}
 
                             }
                         </td>
@@ -103,18 +103,17 @@
 
 @section scripts
 {
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    @Scripts.Render("~/Scripts/DataTables.js")
     <script>
         $(document).ready(function () {
-             $('#dataTable').DataTable({
-                 responsive: true,
-                 "language": {
-                     "emptyTable": "You haven't added an instrument yet!"
-                 },
-                 columnDefs: [
-                     { orderable: false, targets: [1, 3] }
-                 ]
+            $('#dataTable').DataTable({
+                responsive: true,
+                "language": {
+                    "emptyTable": "You haven't added an instrument yet!"
+                },
+                columnDefs: [
+                    { orderable: false, targets: [1, 3] }
+                ]
             });
         });
     </script>

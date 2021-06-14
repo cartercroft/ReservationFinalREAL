@@ -9,7 +9,7 @@
         <div class="col-md-5">
             <img class="instrumentPhoto" src="~/Content/instImages/@Model.InstrumentPhoto" />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 bg-dark text-white rounded-3 p-2">
             <h4>@ViewBag.Title</h4>
             <hr />
             <dl class="dl-horizontal">
@@ -71,8 +71,8 @@
 
             </dl>
             <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerInstrumentID }) |
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerInstrumentID }, new { @class = "text-white" }) |
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "text-white" })
             </p>
         </div>
     </div>
