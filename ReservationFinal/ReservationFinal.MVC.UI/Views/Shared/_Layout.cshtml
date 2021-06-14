@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Locations")">Locations</a></li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">All Instruments</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "OwnerInstruments")">Active Instruments</a></li>
                         <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Reservations")">Reservations</a></li>
                     }
                     else if (Request.IsAuthenticated)

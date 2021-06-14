@@ -25,12 +25,18 @@ namespace ReservationFinal.MVC.UI.Controllers
             var ownerInstruments = db.OwnerInstruments.Where(o => o.OwnerID == currentUser).Include(o => o.InstrumentType).Include(o => o.UserDetail);
             if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
             {
-                ownerInstruments = db.OwnerInstruments.Include(o => o.InstrumentType).Include(o => o.UserDetail);
+                ownerInstruments = db.OwnerInstruments.Where(o => o.IsActive).Include(o => o.InstrumentType).Include(o => o.UserDetail);
             }
             ViewBag.InstrumentsCount = db.OwnerInstruments.Where(i => i.IsActive && i.OwnerID == currentUser).Count();
             return View(ownerInstruments.ToList());
         }
 
+        [Authorize(Roles = "Admin,Employee")]
+        public ActionResult InactiveIndex()
+        {
+            var inactiveInstruments = db.OwnerInstruments.Where(o => !o.IsActive).Include(o => o.InstrumentType).Include(o => o.UserDetail);
+            return View(inactiveInstruments.ToList());
+        }
         // GET: OwnerInstruments/Details/5
         public ActionResult Details(int? id)
         {

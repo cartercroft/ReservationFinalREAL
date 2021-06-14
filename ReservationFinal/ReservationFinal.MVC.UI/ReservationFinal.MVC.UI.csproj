@@ -200,6 +200,12 @@
     <Content Include="Content\images\brokenPianoPersonless.jpg" />
     <Content Include="Content\images\error.jpg" />
     <Content Include="Content\images\headerBackground.png" />
+    <Content Include="Content\images\sort_asc.png" />
+    <Content Include="Content\images\sort_asc_disabled.png" />
+    <Content Include="Content\images\sort_both.png" />
+    <Content Include="Content\images\sort_desc.png" />
+    <Content Include="Content\images\sort_desc_disabled.png" />
+    <Content Include="Content\images\violin.jpg" />
     <Content Include="Content\instImages\noImage.png" />
     <Content Include="Content\instImages\t_noImage.png" />
     <Content Include="favicon.ico" />
@@ -297,6 +303,7 @@
     <Content Include="Views\UserDetails\Edit.cshtml" />
     <Content Include="Views\UserDetails\Index.cshtml" />
     <Content Include="Views\Home\UnauthorizedIndex.cshtml" />
+    <Content Include="Views\OwnerInstruments\InactiveIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
