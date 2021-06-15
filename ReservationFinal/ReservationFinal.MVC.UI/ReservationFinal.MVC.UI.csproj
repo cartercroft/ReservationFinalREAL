@@ -223,6 +223,7 @@
     <Content Include="_Archive\index.html" />
     <Content Include="_Archive\js\scripts.js" />
     <Content Include="configs\AppSecretKeys.config" />
+    <Content Include="configs\Connections.config" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
